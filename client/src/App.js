@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component, Fragment} from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  componentDidMount() {
+    this.searchMusic("rage%20against%20the%20machine");
+  }
+
+  searchMusic(term) {
+    fetch("https://deezerdevs-deezer.p.rapidapi.com/search?q=" + term, {
+      "method": "GET",
+      "headers": {
+        "x-rapidapi-host": process.env.REACT_APP_RAPID_API_HOST,
+        "x-rapidapi-key": process.env.REACT_APP_RAPID_API_KEY
+      }
+    })
+      .then(data => {
+        return data.json();
+      })
+      .then(data => {
+        this.setState({
+          tracks: data
+        });
+        console.log(data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  render() {
+    return (
+      <Fragment>
+        <p>App</p>
+        <code><p>Music App</p></code>
+      </Fragment>
+    );
+  }
 }
 
 export default App;
