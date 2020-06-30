@@ -10,7 +10,7 @@ class MusicSearch extends Component {
   }
 
   componentDidMount() {
-    this.searchMusic("feeder");
+    this.searchMusic();
   }
 
   searchMusic = () => {
@@ -43,7 +43,7 @@ class MusicSearch extends Component {
     const term = e.target.value;
     console.log(term);
     this.setState({
-        tracks: 'feeder',
+        //tracks: 'feeder',
         searchTerm: term
     })
   }
