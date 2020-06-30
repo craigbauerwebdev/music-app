@@ -1,0 +1,4 @@
+body .group::after {
+  content: "";
+  clear: both;
+  display: table; }

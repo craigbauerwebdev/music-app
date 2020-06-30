@@ -5,12 +5,25 @@ class MusicSearch extends Component {
     super(props);
     this.state = {
         tracks: null,
-        searchTerm: "Rock"
-    };
+        searchTerm: "Rock",
+        playerStatus: ""
+    }
+    //this.play = this.play.bind(this);
   }
 
   componentDidMount() {
     this.searchMusic();
+    this.audio = new Audio();
+  }
+
+  playTrack = (src) => {
+    console.log(src);
+    this.audio.src = src;
+    this.audio.play();
+  }
+
+  pauseTrack = () => {
+      this.audio.pause();
   }
 
   searchMusic = () => {
@@ -55,17 +68,26 @@ class MusicSearch extends Component {
             <div>
                 <input onChange={this.updateSearchTerm} />
                 <button onClick={this.searchMusic}>Search</button>
+                <div className="music-search">
                 {
-                    this.state.tracks.data.map(function (track, index) {
+                    this.state.tracks.data.map((track, index) => {
                         const markup =
-                            <div>
-                                <h1>{track.title}</h1>
-                                <p>{track.artist.name}</p>
-                                <hr />
+                            <div className="music-search-track group">
+                                <div className="album-art" style={{backgroundImage: `url(${track.album.cover_xl})`}}></div>
+                                <div className="track-meta">
+                                    <h2>{track.title}</h2>
+                                    <p>{track.artist.name}</p>
+                                </div>
+                                <div className="controls">
+                                    <i className="large material-icons" onClick={() => this.playTrack(track.preview)}>play_circle_outline</i>
+                                    <i className="large material-icons" onClick={() => this.pauseTrack()}>pause_circle_outline</i>
+                                </div>
+                                
                             </div>;
                         return markup;
                     })
                 }
+                </div>
             </div>
         </Fragment>
         );

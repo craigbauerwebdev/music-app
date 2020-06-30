@@ -1,0 +1,26 @@
+body .group::after {
+  content: "";
+  clear: both;
+  display: table; }
+
+.music-search {
+  padding: 0 30px; }
+  .music-search .music-search-track {
+    border-top: 1px solid gray; }
+    .music-search .music-search-track h2 {
+      color: red;
+      font-size: 22px; }
+    .music-search .music-search-track .album-art {
+      width: 100px;
+      height: 100px;
+      float: left;
+      background-size: cover;
+      margin-right: 30px; }
+    .music-search .music-search-track .track-meta {
+      float: left;
+      width: calc(100% - 300px); }
+    .music-search .music-search-track .controls {
+      float: right;
+      width: 150px; }
+      .music-search .music-search-track .controls .material-icons {
+        font-size: 60px; }

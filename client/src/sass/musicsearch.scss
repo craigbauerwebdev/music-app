@@ -1,0 +1,29 @@
+.music-search {
+    padding: 0 30px;
+    .music-search-track {
+        border-top: 1px solid gray;
+        h2 {
+            color: red;
+            font-size: 22px;
+        }
+        .album-art {
+            width: 100px;
+            height: 100px;
+            float: left;
+            //background-image: `url(${track.album.cover_xl})`, 
+            background-size: cover;
+            margin-right: 30px;
+        }
+        .track-meta {
+            float: left;
+            width: calc(100% - 300px);
+        }
+        .controls {
+            float: right;
+            width: 150px;
+            .material-icons {
+                font-size: 60px
+            }
+        }
+    }
+}
