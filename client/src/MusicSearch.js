@@ -4,6 +4,7 @@ class MusicSearch extends Component {
   constructor(props) {
     super(props);
     this.state = {
+        tracks: null,
         searchTerm: "Rock"
     };
   }
@@ -42,19 +43,35 @@ class MusicSearch extends Component {
     const term = e.target.value;
     console.log(term);
     this.setState({
+        tracks: 'feeder',
         searchTerm: term
     })
   }
 
   render() {
-    return (
-      <Fragment>
-        <div>
-            <input onChange={this.updateSearchTerm} />
-            <button onClick={this.searchMusic}>Search</button>
-        </div>
-      </Fragment>
-    );
+    if(this.state.tracks) {
+        return (
+        <Fragment>
+            <div>
+                <input onChange={this.updateSearchTerm} />
+                <button onClick={this.searchMusic}>Search</button>
+                {
+                    this.state.tracks.data.map(function (track, index) {
+                        const markup =
+                            <div>
+                                <h1>{track.title}</h1>
+                                <p>{track.artist.name}</p>
+                                <hr />
+                            </div>;
+                        return markup;
+                    })
+                }
+            </div>
+        </Fragment>
+        );
+    } else {
+        return <p>Loading...</p>;
+    }
   }
 }
 
