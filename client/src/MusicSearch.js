@@ -1,19 +1,22 @@
 import React, {Component, Fragment} from 'react';
-import Header from './Header';
-import Footer from './Footer';
-import MusicSearch from './MusicSearch';
 
-class App extends Component {
+class MusicSearch extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+        searchTerm: "Rock"
+    };
   }
 
   componentDidMount() {
-    this.searchMusic("rage%20against%20the%20machine");
+    this.searchMusic("feeder");
   }
 
-  searchMusic(term) {
+  searchMusic = () => {
+    this.setState({
+        tracks: null
+    });
+    const term = this.state.searchTerm;
     fetch("https://deezerdevs-deezer.p.rapidapi.com/search?q=" + term, {
       "method": "GET",
       "headers": {
@@ -28,22 +31,31 @@ class App extends Component {
         this.setState({
           tracks: data
         });
-        //console.log(data);
+        console.log(data);
       })
       .catch(err => {
         console.log(err);
       });
   }
 
+  updateSearchTerm = (e) => {
+    const term = e.target.value;
+    console.log(term);
+    this.setState({
+        searchTerm: term
+    })
+  }
+
   render() {
     return (
       <Fragment>
-        <Header />
-          <MusicSearch />
-        <Footer />
+        <div>
+            <input onChange={this.updateSearchTerm} />
+            <button onClick={this.searchMusic}>Search</button>
+        </div>
       </Fragment>
     );
   }
 }
 
-export default App;
+export default MusicSearch;
