@@ -1,4 +1,5 @@
 import React, {Component, Fragment} from 'react';
+import SingleTrack from './SingleTrack';
 
 class MusicSearch extends Component {
   constructor(props) {
@@ -56,7 +57,6 @@ class MusicSearch extends Component {
     const term = e.target.value;
     console.log(term);
     this.setState({
-        //tracks: 'feeder',
         searchTerm: term
     })
   }
@@ -71,20 +71,7 @@ class MusicSearch extends Component {
                 <div className="music-search">
                 {
                     this.state.tracks.data.map((track, index) => {
-                        const markup =
-                            <div className="music-search-track group">
-                                <div className="album-art" style={{backgroundImage: `url(${track.album.cover_xl})`}}></div>
-                                <div className="track-meta">
-                                    <h2>{track.title}</h2>
-                                    <p>{track.artist.name}</p>
-                                </div>
-                                <div className="controls">
-                                    <i className="large material-icons" onClick={() => this.playTrack(track.preview)}>play_circle_outline</i>
-                                    <i className="large material-icons" onClick={() => this.pauseTrack()}>pause_circle_outline</i>
-                                </div>
-                                
-                            </div>;
-                        return markup;
+                        return <SingleTrack track={track} playTrack={this.playTrack} pauseTrack={this.pauseTrack} index={index} />;//markup;
                     })
                 }
                 </div>
