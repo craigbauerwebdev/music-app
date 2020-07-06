@@ -18,4 +18,5 @@
       float: right;
       width: 150px; }
       .music-search .music-search-track .controls .material-icons {
-        font-size: 60px; }
+        font-size: 60px;
+        cursor: pointer; }

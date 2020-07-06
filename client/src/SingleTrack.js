@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 
 class SingleTrack extends Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class SingleTrack extends Component {
   componentDidMount() {}
 
   render() {
-    const { track, index } = this.props;
+    const { track, index, currentIndex, playerStatus } = this.props;
     return (    
         <div className="music-search-track group">
             <div className="album-art" style={{ backgroundImage: `url(${track.album.cover_xl})` }}></div>
@@ -20,9 +20,13 @@ class SingleTrack extends Component {
                 <p>{track.artist.name}</p>
             </div>
             <div className="controls">
-                <i>{index}</i>
-                <i className="large material-icons" onClick={() => this.props.playTrack(track.preview)}>play_circle_outline</i>
-                <i className="large material-icons" onClick={() => this.props.pauseTrack()}>pause_circle_outline</i>
+                {/* <i>{index}</i> */}
+                {(index !== currentIndex || playerStatus === "paused") &&
+                  <i className="large material-icons" onClick={() => this.props.playTrack(track.preview, index)}>play_circle_outline</i>
+                }
+                {(index === currentIndex && playerStatus === "playing") &&
+                  <i className="large material-icons" onClick={() => this.props.pauseTrack(index)}>pause_circle_outline</i>
+                }
             </div>
 
         </div>

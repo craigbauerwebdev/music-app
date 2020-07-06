@@ -6,26 +6,43 @@ class MusicSearch extends Component {
     super(props);
     this.state = {
         tracks: null,
-        searchTerm: "Rock",
-        playerStatus: ""
+        searchTerm: null,
+        playerStatus: null
     }
     //this.play = this.play.bind(this);
   }
 
   componentDidMount() {
-    this.searchMusic();
+    //this.searchMusic();
     this.audio = new Audio();
   }
 
-  playTrack = (src) => {
+  playTrack = (src, index) => {
     console.log(src);
+    this.setState({
+      currentIndex: index,
+      playerStatus: "playing"
+    });
     this.audio.src = src;
     this.audio.play();
   }
 
-  pauseTrack = () => {
-      this.audio.pause();
+  pauseTrack = (index) => {
+    this.setState({
+      currentIndex: index,
+      playerStatus: "paused"
+    })
+    this.audio.pause();
   }
+
+  updateCurrentIndex = () => {
+      
+  }
+
+  /* Todo: */
+  // track progress
+  // send playing pause flag to show correct icon
+  // update state on click
 
   searchMusic = () => {
     this.setState({
@@ -55,7 +72,7 @@ class MusicSearch extends Component {
 
   updateSearchTerm = (e) => {
     const term = e.target.value;
-    console.log(term);
+    //console.log(term);
     this.setState({
         searchTerm: term
     })
@@ -71,7 +88,7 @@ class MusicSearch extends Component {
                 <div className="music-search">
                 {
                     this.state.tracks.data.map((track, index) => {
-                        return <SingleTrack track={track} playTrack={this.playTrack} pauseTrack={this.pauseTrack} index={index} />;//markup;
+                        return <SingleTrack track={track} playTrack={this.playTrack} pauseTrack={this.pauseTrack} index={index} currentIndex={this.state.currentIndex} playerStatus={this.state.playerStatus} />;//markup;
                     })
                 }
                 </div>
@@ -79,7 +96,13 @@ class MusicSearch extends Component {
         </Fragment>
         );
     } else {
-        return <p>Loading...</p>;
+      return (
+        <Fragment>
+          <p>Enter and artist, song or album and press search</p>
+          <input onChange={this.updateSearchTerm} />
+          <button onClick={this.searchMusic}>Search</button>
+        </Fragment>
+      );
     }
   }
 }
