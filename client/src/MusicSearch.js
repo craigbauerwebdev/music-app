@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import SingleTrack from './SingleTrack';
+import SearchBar from './SearchBar';
 
 class MusicSearch extends Component {
   constructor(props) {
@@ -83,8 +84,7 @@ class MusicSearch extends Component {
         return (
         <Fragment>
             <div>
-                <input onChange={this.updateSearchTerm} />
-                <button onClick={this.searchMusic}>Search</button>
+                <SearchBar updateSearchTerm={this.updateSearchTerm} searchMusic={this.searchMusic} />
                 <div className="music-search">
                 {
                     this.state.tracks.data.map((track, index) => {
@@ -99,8 +99,7 @@ class MusicSearch extends Component {
       return (
         <Fragment>
           <p>Enter and artist, song or album and press search</p>
-          <input onChange={this.updateSearchTerm} />
-          <button onClick={this.searchMusic}>Search</button>
+          <SearchBar updateSearchTerm={this.updateSearchTerm} searchMusic={this.searchMusic}/>
         </Fragment>
       );
     }

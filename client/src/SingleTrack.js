@@ -18,6 +18,7 @@ class SingleTrack extends Component {
             <div className="track-meta">
                 <h2>{track.title}</h2>
                 <p>{track.artist.name}</p>
+                <i>{track.album.title}</i>
             </div>
             <div className="controls">
                 {/* <i>{index}</i> */}
