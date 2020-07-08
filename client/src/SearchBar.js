@@ -11,10 +11,10 @@ class SearchBar extends Component {
   render() {
     const { updateSearchTerm, searchMusic } = this.props;
     return ( 
-        <Fragment> 
-            <input onChange = { updateSearchTerm } />
+        <div className="search-bar"> 
+            <input placeholder="Enter and artist, song or album" onChange = { updateSearchTerm } />
             <button onClick={ searchMusic }>Search</button>
-        </Fragment>
+        </div>
     );
   }
 }

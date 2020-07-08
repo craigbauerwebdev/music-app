@@ -1,10 +1,8 @@
 .music-search {
   padding: 0 30px; }
   .music-search .music-search-track {
-    border-top: 1px solid gray; }
-    .music-search .music-search-track h2 {
-      color: red;
-      font-size: 22px; }
+    position: relative;
+    border-bottom: 1px solid gray; }
     .music-search .music-search-track .album-art {
       width: 100px;
       height: 100px;
@@ -12,11 +10,25 @@
       background-size: cover;
       margin-right: 30px; }
     .music-search .music-search-track .track-meta {
-      float: left;
-      width: calc(100% - 300px); }
+      width: calc(100% - 300px);
+      position: absolute;
+      left: 130px;
+      top: 50%;
+      transform: translateY(-50%); }
+      .music-search .music-search-track .track-meta h2 {
+        color: #000;
+        margin: 0 0 5px 0;
+        font-size: 20px; }
+      .music-search .music-search-track .track-meta p, .music-search .music-search-track .track-meta i {
+        color: #888;
+        margin: 0; }
     .music-search .music-search-track .controls {
-      float: right;
-      width: 150px; }
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
+      width: 60px;
+      height: 60px; }
       .music-search .music-search-track .controls .material-icons {
         font-size: 60px;
         cursor: pointer; }

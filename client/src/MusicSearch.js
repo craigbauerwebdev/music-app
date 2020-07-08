@@ -36,9 +36,7 @@ class MusicSearch extends Component {
     this.audio.pause();
   }
 
-  updateCurrentIndex = () => {
-      
-  }
+  updateCurrentIndex = () => {}
 
   /* Todo: */
   // track progress
@@ -87,9 +85,9 @@ class MusicSearch extends Component {
                 <SearchBar updateSearchTerm={this.updateSearchTerm} searchMusic={this.searchMusic} />
                 <div className="music-search">
                 {
-                    this.state.tracks.data.map((track, index) => {
-                        return <SingleTrack track={track} playTrack={this.playTrack} pauseTrack={this.pauseTrack} index={index} currentIndex={this.state.currentIndex} playerStatus={this.state.playerStatus} />;//markup;
-                    })
+                  this.state.tracks.data.map((track, index) => {
+                      return <SingleTrack track={track} playTrack={this.playTrack} pauseTrack={this.pauseTrack} index={index} currentIndex={this.state.currentIndex} playerStatus={this.state.playerStatus} />;//markup;
+                  })
                 }
                 </div>
             </div>
@@ -98,7 +96,6 @@ class MusicSearch extends Component {
     } else {
       return (
         <Fragment>
-          <p>Enter and artist, song or album and press search</p>
           <SearchBar updateSearchTerm={this.updateSearchTerm} searchMusic={this.searchMusic}/>
         </Fragment>
       );

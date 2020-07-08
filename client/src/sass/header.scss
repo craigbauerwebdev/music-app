@@ -1,0 +1,11 @@
+header {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    z-index: 99;
+    background: #eee;
+    img {
+        height: 60px;
+        margin: 15px;
+    }
+}
