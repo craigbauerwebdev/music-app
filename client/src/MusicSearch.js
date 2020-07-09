@@ -1,12 +1,14 @@
 import React, {Component, Fragment} from 'react';
 import SingleTrack from './SingleTrack';
 import SearchBar from './SearchBar';
+import NowPlaying from './NowPlaying';
 
 class MusicSearch extends Component {
   constructor(props) {
     super(props);
     this.state = {
         tracks: null,
+        currentTrack: null,
         searchTerm: null,
         playerStatus: null
     }
@@ -18,13 +20,18 @@ class MusicSearch extends Component {
     this.audio = new Audio();
   }
 
-  playTrack = (src, index) => {
-    console.log(src);
+  playTrack = (track, src, index) => {
+    /* console.log("Track: ", track);
+    console.log("Preview: ", src);
+    console.log("Index: ", index); */
     this.setState({
       currentIndex: index,
-      playerStatus: "playing"
+      playerStatus: "playing",
+      currentTrack: track
     });
-    this.audio.src = src;
+    //if(track !== this.state.currentTrack) {
+      this.audio.src = src;
+    //}
     this.audio.play();
   }
 
@@ -47,6 +54,7 @@ class MusicSearch extends Component {
     this.setState({
         tracks: null
     });
+    //this.audio.pause();
     const term = this.state.searchTerm;
     fetch("https://deezerdevs-deezer.p.rapidapi.com/search?q=" + term, {
       "method": "GET",
@@ -60,7 +68,9 @@ class MusicSearch extends Component {
       })
       .then(data => {
         this.setState({
-          tracks: data
+          tracks: data,
+          currentTrack: null,
+          playerStatus: "paused"
         });
         console.log(data);
       })
@@ -91,6 +101,9 @@ class MusicSearch extends Component {
                 }
                 </div>
             </div>
+            {this.state.currentTrack &&
+              <NowPlaying track={this.state.currentTrack} />
+            }
         </Fragment>
         );
     } else {
