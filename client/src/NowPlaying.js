@@ -11,9 +11,16 @@ class NowPlaying extends Component {
   render() {
     const { track } = this.props;
     return ( 
-        <div className="now-playing-dock"> 
-            <img src={track.album.cover} />
-            <h2>{track.title}</h2>
+        <div className="now-playing-dock">
+            <div className="progress-container">
+                <div className="progress-bar" style={{width: "60%"}}></div>
+            </div>
+            <div className="album-cover" style={{background: `url(${track.album.cover})`}}></div>
+            <div className="track-meta">
+                <h2>{track.title}</h2>
+                <p>{track.artist.name}</p>
+                <i>{track.album.title}</i>
+            </div>
          </div>
     );
   }

@@ -9,14 +9,14 @@ class MusicSearch extends Component {
     this.state = {
         tracks: null,
         currentTrack: null,
-        searchTerm: null,
+        searchTerm: 'trivium', //dev only - shpould be null
         playerStatus: null
     }
     //this.play = this.play.bind(this);
   }
 
   componentDidMount() {
-    //this.searchMusic();
+    this.searchMusic();// dev only
     this.audio = new Audio();
   }
 
@@ -29,9 +29,9 @@ class MusicSearch extends Component {
       playerStatus: "playing",
       currentTrack: track
     });
-    //if(track !== this.state.currentTrack) {
+    if(track !== this.state.currentTrack) {
       this.audio.src = src;
-    //}
+    }
     this.audio.play();
   }
 
@@ -72,6 +72,7 @@ class MusicSearch extends Component {
           currentTrack: null,
           playerStatus: "paused"
         });
+        this.audio.src = null;
         console.log(data);
       })
       .catch(err => {

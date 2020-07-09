@@ -1,0 +1,31 @@
+.now-playing-dock {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: #000;
+  color: #fff; }
+  .now-playing-dock .progress-container {
+    height: 5px;
+    background: #ddd; }
+    .now-playing-dock .progress-container .progress-bar {
+      height: 100%;
+      background: red; }
+  .now-playing-dock .album-cover {
+    width: 120px;
+    height: 120px;
+    background: gray; }
+  .now-playing-dock .track-meta {
+    position: absolute;
+    top: 50%;
+    left: 140px;
+    transform: translateY(-50%); }
+    .now-playing-dock .track-meta h2 {
+      font-size: 20px;
+      margin: 0 0 5px 0; }
+    .now-playing-dock .track-meta p {
+      font-size: 14px;
+      margin: 0; }
+    .now-playing-dock .track-meta i {
+      font-size: 14px;
+      margin: 0; }
