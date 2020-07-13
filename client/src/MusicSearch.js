@@ -88,7 +88,29 @@ class MusicSearch extends Component {
     })
   }
 
+  updateProgress = () => {
+    let prog;
+    if(this.state.playerStatus === "playing") {
+      console.log('new int created');
+      //const prog
+      if(!prog) {
+        prog = setInterval(() => {
+          const 
+            currentTime = this.audio.currentTime,
+            currentDuration = this.audio.duration;
+          console.log(currentDuration);
+          this.setState({
+            currentTime,
+            currentDuration
+          });
+        }, 1000);
+      }
+    }
+  }
+
   render() {
+    //console.log('music search re-rendered');
+    this.updateProgress();
     if(this.state.tracks) {
         return (
         <Fragment>
@@ -103,7 +125,7 @@ class MusicSearch extends Component {
                 </div>
             </div>
             {this.state.currentTrack &&
-              <NowPlaying track={this.state.currentTrack} />
+              <NowPlaying  currentTime={this.state.currentTime} currentDuration={this.state.currentDuration} track={this.state.currentTrack} playerStatus={this.state.playerStatus} />
             }
         </Fragment>
         );

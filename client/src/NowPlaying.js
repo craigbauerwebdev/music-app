@@ -8,8 +8,23 @@ class NowPlaying extends Component {
 
   componentDidMount() {}
 
+  setProgress = (type) => {
+    
+  }
+
   render() {
-    const { track } = this.props;
+    const 
+      { track, currentTime, currentDuration } = this.props;
+    let
+      current = Math.round(currentTime),
+      duration = Math.round(currentDuration);
+      if(isNaN(current)) {
+        current = 0;
+      }
+      if(isNaN(duration)) {
+        duration = 0;
+      }
+    //this.setProgress(playerStatus);
     return ( 
         <div className="now-playing-dock">
             <div className="progress-container">
@@ -20,6 +35,7 @@ class NowPlaying extends Component {
                 <h2>{track.title}</h2>
                 <p>{track.artist.name}</p>
                 <i>{track.album.title}</i>
+                <i>{current} : {duration}</i>
             </div>
          </div>
     );
