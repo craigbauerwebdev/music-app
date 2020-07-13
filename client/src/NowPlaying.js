@@ -8,9 +8,7 @@ class NowPlaying extends Component {
 
   componentDidMount() {}
 
-  setProgress = (type) => {
-    
-  }
+  //setProgress = (type) => {}
 
   render() {
     const 

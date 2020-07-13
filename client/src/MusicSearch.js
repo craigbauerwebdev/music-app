@@ -12,7 +12,7 @@ class MusicSearch extends Component {
         searchTerm: 'trivium', //dev only - shpould be null
         playerStatus: null
     }
-    //this.play = this.play.bind(this);
+    this.prog = null;
   }
 
   componentDidMount() {
@@ -41,6 +41,9 @@ class MusicSearch extends Component {
       playerStatus: "paused"
     })
     this.audio.pause();
+    clearInterval(this.prog);
+    this.prog = null;
+    console.log(this.prog);
   }
 
   updateCurrentIndex = () => {}
@@ -89,15 +92,16 @@ class MusicSearch extends Component {
   }
 
   updateProgress = () => {
-    let prog;
     if(this.state.playerStatus === "playing") {
-      console.log('new int created');
+      
       //const prog
-      if(!prog) {
-        prog = setInterval(() => {
+      if(!this.prog) {
+        console.log('new int created');
+        this.prog = setInterval(() => {
           const 
             currentTime = this.audio.currentTime,
             currentDuration = this.audio.duration;
+          console.log(currentTime);
           console.log(currentDuration);
           this.setState({
             currentTime,
