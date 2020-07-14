@@ -15,18 +15,25 @@ class NowPlaying extends Component {
       { track, currentTime, currentDuration } = this.props;
     let
       current = Math.round(currentTime),
-      duration = Math.round(currentDuration);
+      duration = Math.round(currentDuration),
+      progress = parseFloat(((currentTime / currentDuration) * 100).toFixed(4));
+      console.log("PROGRESS: ", progress);
       if(isNaN(current)) {
         current = 0;
       }
       if(isNaN(duration)) {
         duration = 0;
       }
+      /* if(isNaN(progress)) {
+        progress = "0%";
+      } */
     //this.setProgress(playerStatus);
     return ( 
         <div className="now-playing-dock">
             <div className="progress-container">
-                <div className="progress-bar" style={{width: "60%"}}></div>
+              {!isNaN(progress) &&
+                <div className="progress-bar" style={{width: `${progress}%`}}></div>
+              }
             </div>
             <div className="album-cover" style={{background: `url(${track.album.cover})`}}></div>
             <div className="track-meta">

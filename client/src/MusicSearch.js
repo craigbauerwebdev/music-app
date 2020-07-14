@@ -107,7 +107,7 @@ class MusicSearch extends Component {
             currentTime,
             currentDuration
           });
-        }, 1000);
+        }, 100);
       }
     }
   }
