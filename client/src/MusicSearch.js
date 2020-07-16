@@ -21,9 +21,6 @@ class MusicSearch extends Component {
   }
 
   playTrack = (track, src, index) => {
-    /* console.log("Track: ", track);
-    console.log("Preview: ", src);
-    console.log("Index: ", index); */
     this.setState({
       currentIndex: index,
       playerStatus: "playing",
@@ -46,12 +43,19 @@ class MusicSearch extends Component {
     console.log(this.prog);
   }
 
-  updateCurrentIndex = () => {}
+  nextTrack = () => {
+    console.log("play next!!!");
+    //clearInterval
+    clearInterval(this.prog);
+    //play next index
+    const nextIndex = this.state.currentIndex + 1;
+    console.log("Next Index: ", this.state.tracks.data[nextIndex]);
+    this.playTrack(this.state.tracks.data[nextIndex], this.state.tracks.data[nextIndex].preview, nextIndex)
+  }
 
-  /* Todo: */
-  // track progress
-  // send playing pause flag to show correct icon
-  // update state on click
+  prevTrack = () => {
+    console.log("play prev!!!");
+  }
 
   searchMusic = () => {
     this.setState({
@@ -76,7 +80,7 @@ class MusicSearch extends Component {
           playerStatus: "paused"
         });
         this.audio.src = null;
-        console.log(data);
+        //console.log(data);
       })
       .catch(err => {
         console.log(err);
@@ -101,12 +105,15 @@ class MusicSearch extends Component {
           const 
             currentTime = this.audio.currentTime,
             currentDuration = this.audio.duration;
-          console.log(currentTime);
-          console.log(currentDuration);
+          //console.log(currentTime);
+          //console.log(currentDuration);
           this.setState({
             currentTime,
             currentDuration
           });
+          if (this.state.currentTime >= this.state.currentDuration) {
+            this.nextTrack();
+          }
         }, 100);
       }
     }
@@ -123,13 +130,13 @@ class MusicSearch extends Component {
                 <div className="music-search">
                 {
                   this.state.tracks.data.map((track, index) => {
-                      return <SingleTrack track={track} playTrack={this.playTrack} pauseTrack={this.pauseTrack} index={index} currentIndex={this.state.currentIndex} playerStatus={this.state.playerStatus} />;//markup;
+                      return <SingleTrack key={index} track={track} playTrack={this.playTrack} pauseTrack={this.pauseTrack} index={index} currentIndex={this.state.currentIndex} playerStatus={this.state.playerStatus} />;//markup;
                   })
                 }
                 </div>
             </div>
             {this.state.currentTrack &&
-              <NowPlaying  currentTime={this.state.currentTime} currentDuration={this.state.currentDuration} track={this.state.currentTrack} playerStatus={this.state.playerStatus} />
+              <NowPlaying currentTime={this.state.currentTime} currentDuration={this.state.currentDuration} track={this.state.currentTrack} playerStatus={this.state.playerStatus} playTrack={this.playTrack} pauseTrack={this.pauseTrack} index={this.state.currentIndex} currentIndex={this.state.currentIndex} />
             }
         </Fragment>
         );

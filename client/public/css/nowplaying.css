@@ -29,3 +29,13 @@
     .now-playing-dock .track-meta i {
       font-size: 14px;
       margin: 0; }
+  .now-playing-dock .controls {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px; }
+    .now-playing-dock .controls .material-icons {
+      font-size: 60px;
+      cursor: pointer; }

@@ -24,7 +24,6 @@
         top: 50%;
         left: 140px;
         transform: translateY(-50%);
-
         h2 {
             font-size: 20px;
             margin: 0 0 5px 0;
@@ -36,6 +35,18 @@
         i {
             font-size: 14px;
             margin: 0;
+        }
+    }
+    .controls {
+        position: absolute;
+        top: 50%;
+        right: 15px;
+        transform: translateY(-50%);
+        width: 60px;
+        height: 60px;
+        .material-icons {
+            font-size: 60px;
+            cursor: pointer;
         }
     }
 }
