@@ -4,7 +4,12 @@
   "description": "A music App Using The Deezer API",
   "main": "app.js",
   "dependencies": {
-    "express": "^4.17.1"
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "node-fetch": "^2.6.0"
   },
   "devDependencies": {},
   "scripts": {

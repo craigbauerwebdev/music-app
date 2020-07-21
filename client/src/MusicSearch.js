@@ -20,13 +20,13 @@ class MusicSearch extends Component {
     this.audio = new Audio();
   }
 
-  playTrack = (track, src, index) => {
+  playTrack = (track, src, index, next) => {
     this.setState({
       currentIndex: index,
       playerStatus: "playing",
       currentTrack: track
     });
-    if(track !== this.state.currentTrack) {
+    if(track !== this.state.currentTrack || next) {
       this.audio.src = src;
     }
     this.audio.play();
@@ -44,13 +44,17 @@ class MusicSearch extends Component {
   }
 
   nextTrack = () => {
+
     console.log("play next!!!");
     //clearInterval
-    clearInterval(this.prog);
-    //play next index
+    //clearInterval(this.prog);
     const nextIndex = this.state.currentIndex + 1;
-    console.log("Next Index: ", this.state.tracks.data[nextIndex]);
-    this.playTrack(this.state.tracks.data[nextIndex], this.state.tracks.data[nextIndex].preview, nextIndex)
+    console.log(this.state.tracks.data[nextIndex]);
+    console.log(this.state.tracks.data[nextIndex].preview);
+    //play next index 
+    this.playTrack(this.state.tracks.data[nextIndex], this.state.tracks.data[nextIndex].preview, nextIndex, true); // next track true
+    //console.log("Next Index: ", nextIndex,  this.state.tracks.data[nextIndex]);
+    //this.playTrack(this.state.tracks.data[nextIndex], this.state.tracks.data[nextIndex].preview, nextIndex)
   }
 
   prevTrack = () => {
@@ -62,7 +66,18 @@ class MusicSearch extends Component {
         tracks: null
     });
     //this.audio.pause();
-    const term = this.state.searchTerm;
+
+    const term = this.state.searchTerm; //default set for dev
+
+    fetch(`http://localhost:9000/musicsearch/${term}`)
+      .then(response => {
+        console.log("DATA=> ", response);
+        this.setState({
+          tracksN: response
+        });
+      });
+
+
     fetch("https://deezerdevs-deezer.p.rapidapi.com/search?q=" + term, {
       "method": "GET",
       "headers": {
@@ -97,8 +112,6 @@ class MusicSearch extends Component {
 
   updateProgress = () => {
     if(this.state.playerStatus === "playing") {
-      
-      //const prog
       if(!this.prog) {
         console.log('new int created');
         this.prog = setInterval(() => {
