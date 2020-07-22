@@ -61,6 +61,10 @@ class MusicSearch extends Component {
 
   }
 
+  skip5 = () => {
+    this.audio.currentTime = this.audio.currentTime + 5;
+  }
+
   searchMusic = () => {
     this.setState({
         tracks: null
@@ -149,7 +153,19 @@ class MusicSearch extends Component {
                 </div>
             </div>
             {this.state.currentTrack &&
-              <NowPlaying currentTime={this.state.currentTime} currentDuration={this.state.currentDuration} track={this.state.currentTrack} playerStatus={this.state.playerStatus} playTrack={this.playTrack} pauseTrack={this.pauseTrack} index={this.state.currentIndex} currentIndex={this.state.currentIndex} prevTrack={this.prevTrack} nextTrack={this.nextTrack} />
+              <NowPlaying 
+                currentTime={this.state.currentTime} 
+                currentDuration={this.state.currentDuration} 
+                track={this.state.currentTrack} 
+                playerStatus={this.state.playerStatus} 
+                playTrack={this.playTrack} 
+                pauseTrack={this.pauseTrack} 
+                index={this.state.currentIndex} 
+                currentIndex={this.state.currentIndex} 
+                prevTrack={this.prevTrack} 
+                nextTrack={this.nextTrack}
+                skip5={this.skip5} 
+              />
             }
         </Fragment>
         );
