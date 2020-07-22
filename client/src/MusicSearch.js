@@ -44,21 +44,21 @@ class MusicSearch extends Component {
   }
 
   nextTrack = () => {
-
-    console.log("play next!!!");
-    //clearInterval
-    //clearInterval(this.prog);
+    //console.log("play next!!!");
     const nextIndex = this.state.currentIndex + 1;
     console.log(this.state.tracks.data[nextIndex]);
     console.log(this.state.tracks.data[nextIndex].preview);
-    //play next index 
-    this.playTrack(this.state.tracks.data[nextIndex], this.state.tracks.data[nextIndex].preview, nextIndex, true); // next track true
-    //console.log("Next Index: ", nextIndex,  this.state.tracks.data[nextIndex]);
-    //this.playTrack(this.state.tracks.data[nextIndex], this.state.tracks.data[nextIndex].preview, nextIndex)
+    this.playTrack(this.state.tracks.data[nextIndex], this.state.tracks.data[nextIndex].preview, nextIndex, true);
   }
 
   prevTrack = () => {
     console.log("play prev!!!");
+    const prevIndex = this.state.currentIndex - 1;
+    console.log(prevIndex);
+    console.log(this.state.tracks.data[prevIndex]);
+    console.log(this.state.tracks.data[prevIndex].preview);
+    this.playTrack(this.state.tracks.data[prevIndex], this.state.tracks.data[prevIndex].preview, prevIndex, true);
+
   }
 
   searchMusic = () => {
@@ -149,7 +149,7 @@ class MusicSearch extends Component {
                 </div>
             </div>
             {this.state.currentTrack &&
-              <NowPlaying currentTime={this.state.currentTime} currentDuration={this.state.currentDuration} track={this.state.currentTrack} playerStatus={this.state.playerStatus} playTrack={this.playTrack} pauseTrack={this.pauseTrack} index={this.state.currentIndex} currentIndex={this.state.currentIndex} />
+              <NowPlaying currentTime={this.state.currentTime} currentDuration={this.state.currentDuration} track={this.state.currentTrack} playerStatus={this.state.playerStatus} playTrack={this.playTrack} pauseTrack={this.pauseTrack} index={this.state.currentIndex} currentIndex={this.state.currentIndex} prevTrack={this.prevTrack} nextTrack={this.nextTrack} />
             }
         </Fragment>
         );

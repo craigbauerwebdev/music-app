@@ -12,7 +12,7 @@ class NowPlaying extends Component {
 
   render() {
     const 
-      { index, currentIndex, track, currentTime, currentDuration, playerStatus } = this.props;
+      { index, currentIndex, track, currentTime, currentDuration, playerStatus, prevTrack, nextTrack } = this.props;
     let
       current = Math.round(currentTime),
       duration = Math.round(currentDuration),
@@ -40,7 +40,9 @@ class NowPlaying extends Component {
             <i>{current} : {duration}</i>
         </div>
         {/* <i style={{ color: "white", position: "absolute", top: "50%", right: "30px", transform: "translateY(-50%)", fontSize: "60px"}} className="large material-icons">play_circle_outline</i> */}
-        <div className="controls">
+        <i onClick={prevTrack}>prevtrack</i>
+        <i onClick={nextTrack}>nexttrack</i>
+        <div className="controls">  
           {/* <i>{index}</i> */}
           {(index !== currentIndex || playerStatus === "paused") &&
             <i className="large material-icons" onClick={() => this.props.playTrack(track, track.preview, index)}>play_circle_outline</i>
