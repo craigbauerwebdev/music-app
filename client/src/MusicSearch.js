@@ -44,21 +44,29 @@ class MusicSearch extends Component {
   }
 
   nextTrack = () => {
-    //console.log("play next!!!");
-    const nextIndex = this.state.currentIndex + 1;
-    console.log(this.state.tracks.data[nextIndex]);
-    console.log(this.state.tracks.data[nextIndex].preview);
-    this.playTrack(this.state.tracks.data[nextIndex], this.state.tracks.data[nextIndex].preview, nextIndex, true);
+    const
+      playlistLen = this.state.tracks.data.length - 1,
+      nextIndex = this.state.currentIndex + 1;
+    //console.log(this.state.tracks.data[nextIndex]);
+    //console.log(this.state.tracks.data[nextIndex].preview);
+    if(nextIndex > playlistLen) {
+      this.playTrack(this.state.tracks.data[0], this.state.tracks.data[0].preview, 0, true);
+    } else {
+      this.playTrack(this.state.tracks.data[nextIndex], this.state.tracks.data[nextIndex].preview, nextIndex, true);
+    }
   }
 
   prevTrack = () => {
     console.log("play prev!!!");
-    const prevIndex = this.state.currentIndex - 1;
-    console.log(prevIndex);
-    console.log(this.state.tracks.data[prevIndex]);
-    console.log(this.state.tracks.data[prevIndex].preview);
-    this.playTrack(this.state.tracks.data[prevIndex], this.state.tracks.data[prevIndex].preview, prevIndex, true);
-
+    const 
+      playlistLen = this.state.tracks.data.length - 1,
+      prevIndex = this.state.currentIndex - 1;
+      console.log("LEN: ", playlistLen);
+    if(prevIndex < 0) {
+      this.playTrack(this.state.tracks.data[playlistLen], this.state.tracks.data[playlistLen].preview, playlistLen, true);
+    } else {
+      this.playTrack(this.state.tracks.data[prevIndex], this.state.tracks.data[prevIndex].preview, prevIndex, true);
+    }
   }
 
   skip5 = () => {
@@ -69,8 +77,6 @@ class MusicSearch extends Component {
     this.setState({
         tracks: null
     });
-    //this.audio.pause();
-
     const term = this.state.searchTerm; //default set for dev
 
     fetch(`http://localhost:9000/musicsearch/${term}`)

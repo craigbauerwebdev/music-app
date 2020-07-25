@@ -17,7 +17,7 @@ class NowPlaying extends Component {
       current = Math.round(currentTime),
       duration = Math.round(currentDuration),
       progress = parseFloat(((currentTime / currentDuration) * 100).toFixed(4));
-      console.log("PROGRESS: ", progress);
+      //console.log("PROGRESS: ", progress);
       if(isNaN(current)) {
         current = 0;
       }
