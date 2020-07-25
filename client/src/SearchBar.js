@@ -1,12 +1,6 @@
 import React, {Component, Fragment} from 'react';
 
 class SearchBar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  componentDidMount() {}
 
   pressEnter = (e) => {
     if(e.key === "Enter") {

@@ -1,14 +1,15 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
+import NowPlayingDetails from './NowPlayingDetails';
 
 class NowPlaying extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      showDetails: null
+    };
   }
 
   componentDidMount() {}
-
-  //setProgress = (type) => {}
 
   render() {
     const 
@@ -25,34 +26,40 @@ class NowPlaying extends Component {
         duration = 0;
       }
       
-    return ( 
-      <div className="now-playing-dock">
-        <div className="progress-container">
-          {!isNaN(progress) &&
-            <div className="progress-bar" style={{width: `${progress}%`}}></div>
-          }
+    return (
+      <Fragment>
+        <div className="now-playing-dock">
+          <div className="progress-container">
+            {!isNaN(progress) &&
+              <div className="progress-bar" style={{width: `${progress}%`}}></div>
+            }
+          </div>
+          <div className="album-cover" style={{background: `url(${track.album.cover})`}}></div>
+          <div className="track-meta">
+              <h2>{track.title}</h2>
+              <p>{track.artist.name}</p>
+              <i>{track.album.title}</i>
+              <i>{current} : {duration}</i>
+              <p>details</p>
+          </div>
+          <div className="controls">  
+            <i className="large material-icons" onClick={prevTrack}>skip_previous</i>
+            {(index !== currentIndex || playerStatus === "paused") &&
+              <i className="large material-icons" onClick={() => this.props.playTrack(track, track.preview, index)}>play_circle_outline</i>
+            }
+            {(index === currentIndex && playerStatus === "playing") &&
+              <i className="large material-icons" onClick={() => this.props.pauseTrack(index)}>pause_circle_outline</i>
+            }
+            <i className="large material-icons" onClick={nextTrack}>skip_next</i>
+            {playerStatus === "playing" &&
+              <i className="large material-icons" onClick={skip5}>forward_5</i>
+            }
+          </div>
         </div>
-        <div className="album-cover" style={{background: `url(${track.album.cover})`}}></div>
-        <div className="track-meta">
-            <h2>{track.title}</h2>
-            <p>{track.artist.name}</p>
-            <i>{track.album.title}</i>
-            <i>{current} : {duration}</i>
-        </div>
-        {/* <i style={{ color: "white", position: "absolute", top: "50%", right: "30px", transform: "translateY(-50%)", fontSize: "60px"}} className="large material-icons">play_circle_outline</i> */}
-        <div className="controls">  
-          {/* <i>{index}</i> */}
-          <i className="large material-icons" onClick={prevTrack}>skip_previous</i>
-          {(index !== currentIndex || playerStatus === "paused") &&
-            <i className="large material-icons" onClick={() => this.props.playTrack(track, track.preview, index)}>play_circle_outline</i>
-          }
-          {(index === currentIndex && playerStatus === "playing") &&
-            <i className="large material-icons" onClick={() => this.props.pauseTrack(index)}>pause_circle_outline</i>
-          }
-          <i className="large material-icons" onClick={nextTrack}>skip_next</i>
-          <i className="large material-icons" onClick={skip5}>forward_5</i>
-        </div>
-      </div>
+        {this.state.showDetails &&
+          <NowPlayingDetails />
+        }
+      </Fragment>
     );
   }
 }
