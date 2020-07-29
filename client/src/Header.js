@@ -12,7 +12,7 @@ class Header extends Component {
     return (
       <Fragment>
         <header>
-          <img src="./img/music-search-logo.png" />
+          <img alt="music search logo" src="./img/music-search-logo.png" />
         </header>
       </Fragment>
     );
