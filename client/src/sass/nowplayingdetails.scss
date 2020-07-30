@@ -7,4 +7,12 @@
     bottom: 0;
     left: 0;
     z-index: 999;
+    text-align: center;
+    .close-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        cursor: pointer;
+        font-size: 30px;
+    }
 }

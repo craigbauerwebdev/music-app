@@ -1,21 +1,22 @@
 import React, {Component} from 'react';
 
 class NowPlayingDetails extends Component {
-  constructor(props) {
+  /* constructor(props) {
     super(props);
     this.state = {};
   }
 
-  componentDidMount() {}
+  componentDidMount() {} */
 
   render() {
     const 
-      { temp } = this.props;
-    
-      
-    return ( 
+      { title, artist, albumCover, closeDetails } = this.props;
+    return (
         <div className="now-playing-details">
-            <h2>Now Playing Details</h2>
+            <h3>{title}</h3>
+            <p>{artist}</p>
+            <img src={albumCover} width="150" />
+            <div onClick={()=>closeDetails()} className="close-btn">x</div>
         </div>
     );
   }
